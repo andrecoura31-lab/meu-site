@@ -6,9 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root{
+  --bg-card: rgba(255,255,255,0.08);
+  --text: #ffffff;
+}
+
+body.light{
+  --bg-card: rgba(0,0,0,0.08);
+  --text: #000000;
+}
+
 *{
   box-sizing:border-box;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family:Segoe UI, Arial, sans-serif;
 }
 
 body{
@@ -17,106 +27,129 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background-image:url("https://cdn.discordapp.com/attachments/1436562652053901482/1436738085500227664/oni_piece.png?ex=692f049c&is=692db31c&hm=e44163e80d96ddd0bdf01c9d4336731ef1010d422bb244c5d135fbf845ce915a&");
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
-  color:#fff;
+  background:url("https://cdn.discordapp.com/attachments/1436562652053901482/1436738085500227664/oni_piece.png") center/cover fixed;
+  color:var(--text);
 }
 
-/* overlay escuro */
+/* overlay */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:rgba(5,10,25,0.55);
+  background:rgba(5,10,25,.6);
   z-index:0;
 }
 
-/* CARD PRINCIPAL */
+/* CARD */
 .card{
   position:relative;
   z-index:1;
-  width:320px;
-  padding:30px 24px;
-  border-radius:18px;
-  background:rgba(255,255,255,0.08);
+  width:330px;
+  padding:28px;
+  border-radius:20px;
+  background:var(--bg-card);
   backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  box-shadow:0 25px 60px rgba(0,0,0,.6);
+  box-shadow:0 0 25px rgba(255,80,80,0.4);
   text-align:center;
-  animation:fadeIn .8s ease;
+  animation:neon 3s linear infinite;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(15px)}
-  to{opacity:1; transform:translateY(0)}
+@keyframes neon{
+  0%{box-shadow:0 0 20px #ff4d4d;}
+  50%{box-shadow:0 0 30px #ff944d;}
+  100%{box-shadow:0 0 20px #ff4d4d;}
 }
 
-/* AVATAR */
 .avatar{
   width:110px;
   height:110px;
   border-radius:50%;
+  border:3px solid white;
   object-fit:cover;
-  border:3px solid rgba(255,255,255,.6);
-  margin-bottom:15px;
+  margin-bottom:12px;
 }
 
-/* TEXTO */
 h1{
-  margin:6px 0 6px;
-  font-size:24px;
-  font-weight:700;
+  margin:5px 0;
 }
 
 .bio{
   font-size:14px;
   opacity:.85;
-  margin-bottom:20px;
+  margin-bottom:15px;
 }
+
+/* STATUS */
+.status{
+  font-size:13px;
+  margin-bottom:10px;
+}
+.online{color:#4ade80;}
+.offline{color:#f87171;}
 
 /* LINKS */
 .links a{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
+  display:block;
   margin:10px 0;
   padding:12px;
   border-radius:12px;
-  background:rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.15);
   text-decoration:none;
-  color:#fff;
+  color:white;
   font-weight:600;
   transition:.25s;
 }
 
 .links a:hover{
-  background:rgba(255,255,255,0.22);
-  transform:scale(1.04);
+  background:rgba(255,255,255,.3);
+  transform:scale(1.05);
 }
 
-/* LINK DESTACADO */
-.links a.crimson{
-  background:linear-gradient(135deg, #ff4d4d, #ff944d);
-  color:#0b0b0b;
+.crimson{
+  background:linear-gradient(135deg,#ff4d4d,#ff944d);
+  color:#111;
 }
 
-.links a.crimson:hover{
-  transform:scale(1.06);
+/* FIXOS */
+.fixed-discord{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:14px 18px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#ff4d4d,#ff944d);
+  color:black;
+  font-weight:700;
+  text-decoration:none;
+  z-index:5;
 }
 
-/* FOOTER */
-.footer{
-  margin-top:15px;
+.theme-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  border:none;
+  cursor:pointer;
+  background:rgba(255,255,255,.2);
+  color:white;
+  backdrop-filter:blur(10px);
+}
+
+/* VISITAS */
+.visits{
+  margin-top:10px;
   font-size:12px;
-  opacity:.6;
+  opacity:.7;
 }
 </style>
 </head>
 
 <body>
+
+<button class="theme-btn" onclick="toggleTheme()">🌗</button>
 
 <div class="card">
   <img class="avatar" src="https://img.odcdn.com.br/wp-content/uploads/2024/04/my-hero-academia-anime.png">
@@ -124,17 +157,51 @@ h1{
   <h1>Akinorinei</h1>
   <div class="bio">Não sigo o meta. Eu crio o meu.</div>
 
-  <div class="links">
-    <a href="https://discord.com/channels/@me">💬 Discord</a>
-    <a href="https://www.roblox.com/pt/users/4663224663/profile">🕹 Roblox</a>
-    <a class="crimson" href="https://discord.gg/3TWnbqT5mu">🔥 Crimson Blaze Discord</a>
-    <a href="https://steamcommunity.com/id/Akinorinei/">🎮 Steam</a>
-    <a href="tiktok.com/@crimson.blaze.vbl"> Tiktok</a>
+  <div class="status">
+    Status: <span id="status" class="offline">Offline</span>
   </div>
 
-  <div class="footer">© Akinorinei</div>
+  <div class="links">
+    <a class="crimson" href="https://discord.gg/3TWnbqT5mu">🔥 Crimson Blaze Discord</a>
+    <a href="https://tiktok.com/@crimson.blaze.vbl">🎵 TikTok</a>
+    <a href="https://www.roblox.com/pt/users/4663224663/profile">🕹 Roblox</a>
+    <a href="https://steamcommunity.com/id/Akinorinei/">🎮 Steam</a>
+  </div>
+
+  <div class="visits">👀 Visitas: <span id="visits">0</span></div>
 </div>
+
+<a class="fixed-discord" href="https://discord.gg/3TWnbqT5mu">
+  🔥 Entrar no Discord
+</a>
+
+<script>
+/* VISITAS */
+let visits = localStorage.getItem("visits") || 0;
+visits++;
+localStorage.setItem("visits", visits);
+document.getElementById("visits").textContent = visits;
+
+/* STATUS */
+function updateStatus(){
+  const status = document.getElementById("status");
+  if(navigator.onLine){
+    status.textContent = "Online";
+    status.className = "online";
+  }else{
+    status.textContent = "Offline";
+    status.className = "offline";
+  }
+}
+updateStatus();
+window.addEventListener("online", updateStatus);
+window.addEventListener("offline", updateStatus);
+
+/* TEMA */
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
+</script>
 
 </body>
 </html>
-
