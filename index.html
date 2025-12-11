@@ -6,126 +6,221 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
-:root{
-  --bg:#0b0f1a;
-  --card:#0e1423;
-  --text:#fff;
-  --neon:#ff7a18;
-}
-.light{
-  --bg:#f3f4f6;
-  --card:#ffffff;
-  --text:#111;
+:root {
+  --bg: #0b0f1a;
+  --card: #0e1423;
+  --text: #fff;
+  --neon: #ff7a18;
+  --accent: #00ff88;
+  --error: #ff4444;
 }
 
-body{
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:
-    linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
-    url("https://cdn.discordapp.com/attachments/1436562652053901482/1436738085500227664/oni_piece.png");
-  background-size:cover;
-  background-position:center;
-  font-family:Arial, Helvetica, sans-serif;
-  color:var(--text);
+.light {
+  --bg: #f3f4f6;
+  --card: #ffffff;
+  --text: #111;
+  --neon: #ff7a18;
+  --accent: #00aa66;
+  --error: #cc3333;
 }
 
-.card{
-  background:var(--card);
-  padding:30px;
-  width:300px;
-  text-align:center;
-  border-radius:20px;
-  position:relative;
-  animation:neon 3s infinite alternate;
-}
-@keyframes neon{
-  from{ box-shadow:0 0 15px var(--neon);}
-  to{ box-shadow:0 0 35px var(--neon);}
-}
-
-.avatar{
-  width:130px;
-  height:130px;
-  border-radius:50%;
-  border:4px solid var(--neon);
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text);
+  overflow: hidden;
+  position: relative;
 }
 
-h1{
-  margin:15px 0 5px;
-}
-p{
-  font-size:14px;
-  opacity:.85;
-}
-a{
-  display:block;
-  margin:10px 0;
-  color:white;
-  text-decoration:none;
-}
-a:hover{opacity:.8}
-
-.status{
-  margin-top:8px;
-  font-size:14px;
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
 }
 
-.visitas{
-  margin-top:15px;
-  font-size:13px;
-  opacity:.8;
+.square {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 122, 24, 0.1);
+  border: 1px solid rgba(255, 122, 24, 0.3);
+  transition: transform 0.1s ease-out;
 }
 
-/* botão fixo direita */
-.fixed-discord{
-  position:fixed;
-  right:20px;
-  top:50%;
-  transform:translateY(-50%);
-  background:linear-gradient(135deg,#ff512f,#f09819);
-  color:white;
-  padding:14px 20px;
-  border-radius:30px;
-  font-weight:bold;
-  text-decoration:none;
-  box-shadow:0 0 20px rgba(255,120,20,.7);
+.card {
+  background: var(--card);
+  padding: 40px;
+  width: 350px;
+  max-width: 90vw;
+  text-align: center;
+  border-radius: 25px;
+  position: relative;
+  box-shadow: 0 0 30px rgba(255, 122, 24, 0.5);
+  animation: glow 3s infinite alternate;
+  z-index: 1;
 }
 
-/* botão tema */
-.theme{
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:#111;
-  color:white;
-  border:none;
-  padding:10px 14px;
-  border-radius:50%;
-  cursor:pointer;
+@keyframes glow {
+  from { box-shadow: 0 0 20px var(--neon); }
+  to { box-shadow: 0 0 40px var(--neon), 0 0 60px rgba(255, 122, 24, 0.3); }
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 5px solid var(--neon);
+  box-shadow: 0 0 20px rgba(255, 122, 24, 0.7);
+  transition: transform 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+}
+
+h1 {
+  margin: 20px 0 10px;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 0 0 10px var(--neon);
+}
+
+p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+a {
+  display: block;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--neon), #ff512f);
+  color: white;
+  text-decoration: none;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 122, 24, 0.4);
+}
+
+a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 122, 24, 0.6);
+  opacity: 0.9;
+}
+
+.status {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.visitas {
+  margin-top: 20px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Botão fixo direita */
+.fixed-discord {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, #ff512f, #f09819);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 25px rgba(255, 120, 20, 0.7);
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.fixed-discord:hover {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 0 35px rgba(255, 120, 20, 0.9);
+}
+
+/* Botão tema */
+.theme {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--card);
+  color: var(--text);
+  border: 2px solid var(--neon);
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.theme:hover {
+  background: var(--neon);
+  color: var(--bg);
+  transform: rotate(180deg);
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 90vw;
+    padding: 30px;
+  }
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  .fixed-discord {
+    right: 10px;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
 }
 </style>
 </head>
 
 <body>
+<div class="background" id="background"></div>
 
-<button class="theme" onclick="toggle()">🌙</button>
+<button class="theme" onclick="toggleTheme()">🌙</button>
 
 <div class="card">
-  <img class="avatar" src="https://i.imgur.com/2yaf2wb.png">
+  <img class="avatar" src="https://i.imgur.com/2yaf2wb.png" alt="Avatar">
   <h1>Akinorinei</h1>
   <p>Não sigo o meta. Eu crio o meu.</p>
 
   <div class="status">
-    Status: <span id="status" style="color:#00ff88">Online</span>
+    Status: <span id="status" style="color: var(--accent)">Online</span>
   </div>
 
-  <a href="https://tiktok.com/@crimson.blaze.vbl">🎵 TikTok</a>
-  <a href="https://roblox.com/">🎮 Roblox</a>
-  <a href="https://steamcommunity.com/">🕹 Steam</a>
+  <div class="links">
+    <a href="https://tiktok.com/@crimson.blaze.vbl">🎵 TikTok</a>
+    <a href="https://roblox.com/">🎮 Roblox</a>
+    <a href="https://steamcommunity.com/">🕹 Steam</a>
+  </div>
 
   <div class="visitas">
     👁 Visitas: <span id="count">0</span>
@@ -137,22 +232,55 @@ a:hover{opacity:.8}
 </a>
 
 <script>
-/* visitas */
+// Fundo interativo com quadrados
+const background = document.getElementById('background');
+const squares = [];
+
+function createSquares() {
+  for (let i = 0; i < 50; i++) {
+    const square = document.createElement('div');
+    square.classList.add('square');
+    square.style.left = Math.random() * 100 + '%';
+    square.style.top = Math.random() * 100 + '%';
+    square.style.animationDelay = Math.random() * 5 + 's';
+    background.appendChild(square);
+    squares.push(square);
+  }
+}
+
+function moveSquares(e) {
+  const mouseX = e.clientX / window.innerWidth;
+  const mouseY = e.clientY / window.innerHeight;
+
+  squares.forEach((square, index) => {
+    const speed = (index % 3 + 1) * 0.5;
+    const x = (mouseX - 0.5) * speed * 100;
+    const y = (mouseY - 0.5) * speed * 100;
+    square.style.transform = `translate(${x}px, ${y}px)`;
+  });
+}
+
+document.addEventListener('mousemove', moveSquares);
+createSquares();
+
+// Contador de visitas
 let v = localStorage.getItem("visitas");
-v = v ? Number(v)+1 : 1;
+v = v ? Number(v) + 1 : 1;
 localStorage.setItem("visitas", v);
 document.getElementById("count").innerText = v;
 
-/* status fake */
-setInterval(()=>{
+// Status fake
+setInterval(() => {
   const s = document.getElementById("status");
-  s.innerText = s.innerText==="Online"?"Offline":"Online";
-  s.style.color = s.innerText==="Online" ? "#00ff88" : "#ff4444";
-},8000);
+  s.innerText = s.innerText === "Online" ? "Offline" : "Online";
+  s.style.color = s.innerText === "Online" ? "var(--accent)" : "var(--error)";
+}, 8000);
 
-/* tema */
-function toggle(){
+// Alternar tema
+function toggleTheme() {
   document.body.classList.toggle("light");
+  const themeBtn = document.querySelector('.theme');
+  themeBtn.innerText = document.body.classList.contains('light') ? '☀️' : '🌙';
 }
 </script>
 
