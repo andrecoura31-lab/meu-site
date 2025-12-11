@@ -7,34 +7,38 @@
 
 <style>
 :root {
-  --bg: #0b0f1a;
-  --card: #0e1423;
-  --text: #fff;
-  --neon: #ff7a18;
-  --accent: #00ff88;
-  --error: #ff4444;
+  --bg: #0a0a0a;
+  --text: #ffffff;
+  --accent: #ff7a18;
+  --link-bg: rgba(255, 122, 24, 0.1);
+  --link-hover: rgba(255, 122, 24, 0.3);
+  --status-online: #00ff88;
+  --status-offline: #ff4444;
 }
 
 .light {
-  --bg: #f3f4f6;
-  --card: #ffffff;
-  --text: #111;
-  --neon: #ff7a18;
-  --accent: #00aa66;
-  --error: #cc3333;
+  --bg: #f5f5f5;
+  --text: #000000;
+  --accent: #ff7a18;
+  --link-bg: rgba(255, 122, 24, 0.1);
+  --link-hover: rgba(255, 122, 24, 0.3);
+  --status-online: #00aa66;
+  --status-offline: #cc3333;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: var(--bg);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Inter', sans-serif;
   color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   position: relative;
+  padding: 20px;
 }
 
 .background {
@@ -49,37 +53,27 @@ body {
 
 .square {
   position: absolute;
-  width: 20px;
-  height: 20px;
-  background: rgba(255, 122, 24, 0.1);
-  border: 1px solid rgba(255, 122, 24, 0.3);
+  width: 15px;
+  height: 15px;
+  background: var(--link-bg);
+  border: 1px solid var(--accent);
   transition: transform 0.1s ease-out;
 }
 
-.card {
-  background: var(--card);
-  padding: 40px;
-  width: 350px;
-  max-width: 90vw;
+.container {
   text-align: center;
-  border-radius: 25px;
-  position: relative;
-  box-shadow: 0 0 30px rgba(255, 122, 24, 0.5);
-  animation: glow 3s infinite alternate;
+  max-width: 600px;
+  width: 100%;
   z-index: 1;
 }
 
-@keyframes glow {
-  from { box-shadow: 0 0 20px var(--neon); }
-  to { box-shadow: 0 0 40px var(--neon), 0 0 60px rgba(255, 122, 24, 0.3); }
-}
-
 .avatar {
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  border: 5px solid var(--neon);
-  box-shadow: 0 0 20px rgba(255, 122, 24, 0.7);
+  border: 4px solid var(--accent);
+  box-shadow: 0 0 20px rgba(255, 122, 24, 0.5);
+  margin-bottom: 20px;
   transition: transform 0.3s ease;
 }
 
@@ -88,75 +82,58 @@ body {
 }
 
 h1 {
-  margin: 20px 0 10px;
-  font-size: 28px;
-  font-weight: bold;
-  text-shadow: 0 0 10px var(--neon);
+  font-size: 2.5rem;
+  margin: 0 0 10px;
+  font-weight: 700;
+  text-shadow: 0 0 10px var(--accent);
 }
 
-p {
-  font-size: 16px;
-  opacity: 0.9;
+.bio {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin-bottom: 30px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.status {
+  font-size: 1rem;
   margin-bottom: 20px;
+  font-weight: 500;
 }
 
 .links {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 20px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
-a {
-  display: block;
+.link {
+  display: inline-block;
   padding: 12px 20px;
-  background: linear-gradient(135deg, var(--neon), #ff512f);
-  color: white;
+  background: var(--link-bg);
+  border: 1px solid var(--accent);
+  color: var(--text);
   text-decoration: none;
-  border-radius: 15px;
-  font-weight: bold;
+  border-radius: 25px;
+  font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 122, 24, 0.4);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 122, 24, 0.6);
-  opacity: 0.9;
+.link:hover {
+  background: var(--link-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 122, 24, 0.4);
 }
 
-.status {
-  margin-top: 15px;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.visitas {
+.stats {
+  font-size: 0.9rem;
+  opacity: 0.7;
   margin-top: 20px;
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-/* Botão fixo direita */
-.fixed-discord {
-  position: fixed;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: linear-gradient(135deg, #ff512f, #f09819);
-  color: white;
-  padding: 15px 25px;
-  border-radius: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 0 0 25px rgba(255, 120, 20, 0.7);
-  transition: all 0.3s ease;
-  z-index: 2;
-}
-
-.fixed-discord:hover {
-  transform: translateY(-50%) scale(1.05);
-  box-shadow: 0 0 35px rgba(255, 120, 20, 0.9);
 }
 
 /* Botão tema */
@@ -164,10 +141,10 @@ a:hover {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: var(--card);
+  background: var(--bg);
   color: var(--text);
-  border: 2px solid var(--neon);
-  padding: 12px;
+  border: 2px solid var(--accent);
+  padding: 10px;
   border-radius: 50%;
   cursor: pointer;
   font-size: 18px;
@@ -176,27 +153,26 @@ a:hover {
 }
 
 .theme:hover {
-  background: var(--neon);
+  background: var(--accent);
   color: var(--bg);
   transform: rotate(180deg);
 }
 
 @media (max-width: 600px) {
-  .card {
-    width: 90vw;
-    padding: 30px;
+  h1 {
+    font-size: 2rem;
   }
   .avatar {
     width: 120px;
     height: 120px;
   }
-  h1 {
-    font-size: 24px;
+  .links {
+    flex-direction: column;
+    align-items: center;
   }
-  .fixed-discord {
-    right: 10px;
-    padding: 12px 20px;
-    font-size: 14px;
+  .link {
+    width: 80%;
+    text-align: center;
   }
 }
 </style>
@@ -207,29 +183,26 @@ a:hover {
 
 <button class="theme" onclick="toggleTheme()">🌙</button>
 
-<div class="card">
+<div class="container">
   <img class="avatar" src="https://i.imgur.com/2yaf2wb.png" alt="Avatar">
   <h1>Akinorinei</h1>
-  <p>Não sigo o meta. Eu crio o meu.</p>
+  <p class="bio">Não sigo o meta. Eu crio o meu.</p>
 
   <div class="status">
-    Status: <span id="status" style="color: var(--accent)">Online</span>
+    Status: <span id="status" style="color: var(--status-online)">Online</span>
   </div>
 
   <div class="links">
-    <a href="https://tiktok.com/@crimson.blaze.vbl">🎵 TikTok</a>
-    <a href="https://roblox.com/">🎮 Roblox</a>
-    <a href="https://steamcommunity.com/">🕹 Steam</a>
+    <a class="link" href="https://tiktok.com/@crimson.blaze.vbl">🎵 TikTok</a>
+    <a class="link" href="https://discord.gg/3TWnbqT5mu">🔥 Discord</a>
+    <a class="link" href="https://roblox.com/">🎮 Roblox</a>
+    <a class="link" href="https://steamcommunity.com/">🕹 Steam</a>
   </div>
 
-  <div class="visitas">
+  <div class="stats">
     👁 Visitas: <span id="count">0</span>
   </div>
 </div>
-
-<a class="fixed-discord" href="https://discord.gg/3TWnbqT5mu">
-🔥 Crimson Blaze Discord
-</a>
 
 <script>
 // Fundo interativo com quadrados
@@ -237,7 +210,7 @@ const background = document.getElementById('background');
 const squares = [];
 
 function createSquares() {
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 60; i++) {
     const square = document.createElement('div');
     square.classList.add('square');
     square.style.left = Math.random() * 100 + '%';
@@ -253,7 +226,7 @@ function moveSquares(e) {
   const mouseY = e.clientY / window.innerHeight;
 
   squares.forEach((square, index) => {
-    const speed = (index % 3 + 1) * 0.5;
+    const speed = (index % 4 + 1) * 0.3;
     const x = (mouseX - 0.5) * speed * 100;
     const y = (mouseY - 0.5) * speed * 100;
     square.style.transform = `translate(${x}px, ${y}px)`;
@@ -273,7 +246,7 @@ document.getElementById("count").innerText = v;
 setInterval(() => {
   const s = document.getElementById("status");
   s.innerText = s.innerText === "Online" ? "Offline" : "Online";
-  s.style.color = s.innerText === "Online" ? "var(--accent)" : "var(--error)";
+  s.style.color = s.innerText === "Online" ? "var(--status-online)" : "var(--status-offline)";
 }, 8000);
 
 // Alternar tema
